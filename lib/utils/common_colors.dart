@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CommonColors {
-  static const primaryColor = Color(0xFFF5831F);
+  static const primaryColor = Color(0xFF81aac6);
   static const secondaryColor = Color(0xFF334856);
   static const blue4b = Color(0xFF4B70FF);
   static const blackColor = Color(0xFF000000);
@@ -10,7 +10,7 @@ class CommonColors {
   static const red = Color(0xFFEA4335);
   static const blue = Color(0xFF3B5998);
   static const black8f = Color(0xFF8F8F8F);
-  static const greenColor = Color(0xFF82B140);
+  static const greenColor = Color(0xFF246d8e);
   static const gray78 = Color(0xFF78849E);
   static const black23 = Color(0xFF232530);
   static const blue14 = Color(0xFF14395A);

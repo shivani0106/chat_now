@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:chat_now/database/app_preferences.dart';
+import 'package:chat_now/models/country_master.dart';
 import 'package:chat_now/utils/common_utils.dart';
 import 'package:chat_now/utils/constant.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +11,7 @@ class AppModel with ChangeNotifier {
   bool isLoading = true;
   String locale = AppConstants.LANGUAGE_NORWEGIAN;
   AppPreferences appPreferences = new AppPreferences();
-
-
+  List<CountryDetails> countryList = [];
 
   List<Language> lanName = [
     Language(language: 'English', languageCode: AppConstants.LANGUAGE_ENGLISH),
@@ -20,10 +20,16 @@ class AppModel with ChangeNotifier {
   ];
   String? currentName = AppConstants.LANGUAGE_NORWEGIAN;
 
-
   void updateTheme(bool theme) {
     darkTheme = theme;
     notifyListeners();
+  }
+
+  getCountry(BuildContext context) async {
+    String data = await DefaultAssetBundle.of(context)
+        .loadString('assets/json/country.json');
+    var jsonResult = json.decode(data);
+    countryList = CountryMaster.fromJson(jsonResult).country!;
   }
 
   void changeLanguage() async {

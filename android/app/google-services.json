@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "328069499038",
+    "project_id": "chatnow-490f9",
+    "storage_bucket": "chatnow-490f9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:328069499038:android:ab8f3f558b1cd78c5f138f",
+        "android_client_info": {
+          "package_name": "com.harmis.chat_now"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "328069499038-jpqiuegjkh7k48pd0gjgea33f4p2lfpv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.harmis.chat_now",
+            "certificate_hash": "d0a077f28df7960b1491e0e7da40eeae336c2b82"
+          }
+        },
+        {
+          "client_id": "328069499038-lpcb57gi0gds1imqvct92fvfum8mlsee.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0WCWS9EBLUuiUcBRr4lEyw9iMXRGw8Vw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "328069499038-lpcb57gi0gds1imqvct92fvfum8mlsee.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

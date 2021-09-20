@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:chat_now/utils/common_utils.dart';
+import 'package:chat_now/view/sign_in/sign_in_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -15,7 +15,10 @@ class SplashViewModel with ChangeNotifier {
   bool startSession = false;
   String? currentSessionId;
 
-  redirectToSignInView(BuildContext context) {}
+  redirectToSignInView(BuildContext context) {
+    Navigator.pushReplacement(
+        context, CupertinoPageRoute(builder: (context) => SignInView()));
+  }
 
   /*void getActiveSession() async {
     await appPreferences.getUserActiveSession().then((value) {

@@ -3,11 +3,16 @@ import 'dart:convert';
 import 'package:chat_now/database/app_preferences.dart';
 import 'package:chat_now/generated/i18n.dart';
 import 'package:chat_now/models/app.dart';
+import 'package:chat_now/utils/constant.dart';
 import 'package:chat_now/view/no_internet/no_internet_view.dart';
+import 'package:chat_now/view/sign_in/signIn_view_model.dart';
+import 'package:chat_now/view/sign_up/signup_view_model.dart';
 import 'package:chat_now/view/splash_view/splash_view.dart';
+import 'package:chat_now/view/splash_view/splash_view_model.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 class App extends StatefulWidget {
   @override
@@ -91,7 +96,14 @@ class AppState extends State<App> /*with WidgetsBindingObserver*/ {
             );
           }
           return MultiProvider(
-            providers: [],
+            providers: [
+              ChangeNotifierProvider<SplashViewModel>(
+                  create: (_) => SplashViewModel()),
+              ChangeNotifierProvider<SignInViewModel>(
+                  create: (_) => SignInViewModel()),
+              ChangeNotifierProvider<SignupViewModel>(
+                  create: (_) => SignupViewModel())
+            ],
             child: MaterialApp(
               builder: (BuildContext context, Widget? child) {
                 final MediaQueryData data = MediaQuery.of(context);
@@ -103,16 +115,16 @@ class AppState extends State<App> /*with WidgetsBindingObserver*/ {
               navigatorObservers: [routeObserver],
               debugShowCheckedModeBanner: false,
               initialRoute: '/',
-              locale: new Locale(Provider.of<AppModel>(context).locale, ""),
-              /*localizationsDelegates: [
+              /*locale: new Locale(Provider.of<AppModel>(context).locale, ""),*/
+              localizationsDelegates: [
                 S.delegate!,
                 GlobalMaterialLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
                 GlobalCupertinoLocalizations.delegate,
-              ],*/
+              ],
               supportedLocales: S.delegate!.supportedLocales,
-              /*localeListResolutionCallback: S.delegate!.listResolution(
-                  fallback: const Locale(AppConstants.LANGUAGE_ENGLISH, '')),*/
+              localeListResolutionCallback: S.delegate!.listResolution(
+                  fallback: const Locale(AppConstants.LANGUAGE_ENGLISH, '')),
               home: Splash(),
               routes: <String, WidgetBuilder>{},
             ),

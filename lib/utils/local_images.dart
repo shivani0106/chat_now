@@ -38,4 +38,6 @@ class LocalImages {
   static final String ic_vipps_logo = 'assets/images/ic_vipps_logo.png';
   static final String ic_ack_icon = 'assets/images/ic_ack_icon.png';
   static final String ic_language = 'assets/images/ic_language.png';
+  static final String ic_google_logo = 'assets/images/ic_google.png';
+  static final String ic_facebook_logo = 'assets/images/ic_facebook.png';
 }

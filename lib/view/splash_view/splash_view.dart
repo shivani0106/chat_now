@@ -32,11 +32,8 @@ class _SplashState extends State<Splash> {
 
     new Future.delayed(const Duration(seconds: 3), () {
       mViewModel = Provider.of<SplashViewModel>(context, listen: false);
+      mViewModel!.redirectToSignInView(context);
       // timer for the splashscreen
-      /*mViewModel!.getCurrentPayment(context);*/
-      /*if (appModel!.isStart) {
-        mViewModel!.startTimer(context);
-      }*/
     });
   }
 
