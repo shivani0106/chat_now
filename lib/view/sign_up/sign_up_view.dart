@@ -19,7 +19,6 @@ class SignUpView extends StatefulWidget {
 class _SignUpViewState extends State<SignUpView> {
   SignupViewModel? mViewModel;
 
-
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
   TextEditingController confimPasswordController = new TextEditingController();
@@ -172,7 +171,7 @@ class _SignUpViewState extends State<SignUpView> {
                 //* ..........................Sign Up Button....................*//*
                 Column(
                   children: [
-                    CustomButton(
+                    CustomButtonWithOpacity(
                       callback: () {
                         FocusScope.of(context).unfocus();
 

@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:convert';
+
 import 'package:chat_now/database/app_preferences.dart';
 import 'package:chat_now/generated/i18n.dart';
 import 'package:chat_now/models/app.dart';
@@ -11,8 +11,8 @@ import 'package:chat_now/view/splash_view/splash_view.dart';
 import 'package:chat_now/view/splash_view/splash_view_model.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
 
 class App extends StatefulWidget {
   @override
@@ -110,9 +110,8 @@ class AppState extends State<App> /*with WidgetsBindingObserver*/ {
                 return MediaQuery(
                     child: child!, data: data.copyWith(textScaleFactor: 1));
               },
-              title: 'PowerPay',
+              title: 'ChatNow',
               navigatorKey: mainNavigatorKey,
-              navigatorObservers: [routeObserver],
               debugShowCheckedModeBanner: false,
               initialRoute: '/',
               /*locale: new Locale(Provider.of<AppModel>(context).locale, ""),*/

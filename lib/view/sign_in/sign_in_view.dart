@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:chat_now/generated/i18n.dart';
 import 'package:chat_now/utils/common_colors.dart';
 import 'package:chat_now/utils/common_utils.dart';
-import 'package:chat_now/utils/constant.dart';
 import 'package:chat_now/utils/local_images.dart';
 import 'package:chat_now/utils/text_style.dart';
 import 'package:chat_now/view/sign_in/signIn_view_model.dart';
@@ -13,6 +12,7 @@ import 'package:chat_now/widget/custom_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 class SignInView extends StatefulWidget {
@@ -85,14 +85,49 @@ class _SignInViewState extends State<SignInView> {
     );
 
     final _socialLogin = Container(
+      margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.3),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            child: Image.asset(LocalImages.ic_google_logo),
+            height: 45,
+            width: 45,
+            padding: EdgeInsets.only(top: 10, bottom: 10),
+            decoration: BoxDecoration(
+                color: CommonColors.whiteColor,
+                boxShadow: [
+                  BoxShadow(
+                      color: const Color(0x1f3c679d),
+                      offset: Offset(0, 2),
+                      blurRadius: 5,
+                      spreadRadius: 1),
+                ],
+                borderRadius: BorderRadius.circular(50.0)),
+            child: Image.asset(
+              LocalImages.ic_google_logo,
+            ),
+          ),
+          SizedBox(
+            width: 15.0,
           ),
           Container(
-            child: Image.asset(LocalImages.ic_facebook_logo),
-          )
+            height: 45,
+            width: 45,
+            padding: EdgeInsets.only(top: 10, bottom: 10),
+            decoration: BoxDecoration(
+                color: CommonColors.whiteColor,
+                boxShadow: [
+                  BoxShadow(
+                      color: const Color(0x1f3c679d),
+                      offset: Offset(0, 2),
+                      blurRadius: 5,
+                      spreadRadius: 1),
+                ],
+                borderRadius: BorderRadius.circular(50.0)),
+            child: Image.asset(
+              LocalImages.ic_facebook_logo,
+            ),
+          ),
         ],
       ),
     );
