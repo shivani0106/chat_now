@@ -148,7 +148,7 @@ class _SignUpViewState extends State<SignUpView> {
                       SizedBox(
                         height: 20,
                       ),
-                      reusableTextField(
+                      /*reusableTextField(
                           hint: S.of(context)!.address + ":",
                           controller: addressController),
                       SizedBox(
@@ -164,7 +164,7 @@ class _SignUpViewState extends State<SignUpView> {
                       reusableTextField(
                           hint: S.of(context)!.postalAddress + ":",
                           controller: postalAddressController,
-                          textInputAction: TextInputAction.done),
+                          textInputAction: TextInputAction.done),*/
                     ],
                   ),
                 ),

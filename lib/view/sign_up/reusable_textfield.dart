@@ -3,7 +3,6 @@ import 'package:chat_now/utils/common_colors.dart';
 import 'package:chat_now/utils/text_style.dart';
 import 'package:flutter/material.dart';
 
-
 Container reusableTextField(
     {@required String? hint,
     Icon? icon,

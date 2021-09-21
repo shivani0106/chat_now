@@ -85,26 +85,31 @@ class _SignInViewState extends State<SignInView> {
     );
 
     final _socialLogin = Container(
-      margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.3),
+      //margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.3),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            height: 45,
-            width: 45,
-            padding: EdgeInsets.only(top: 10, bottom: 10),
-            decoration: BoxDecoration(
-                color: CommonColors.whiteColor,
-                boxShadow: [
-                  BoxShadow(
-                      color: const Color(0x1f3c679d),
-                      offset: Offset(0, 2),
-                      blurRadius: 5,
-                      spreadRadius: 1),
-                ],
-                borderRadius: BorderRadius.circular(50.0)),
-            child: Image.asset(
-              LocalImages.ic_google_logo,
+          InkWell(
+            onTap: () {
+              mViewModel!.loginWithGoogle();
+            },
+            child: Container(
+              height: 45,
+              width: 45,
+              padding: EdgeInsets.only(top: 10, bottom: 10),
+              decoration: BoxDecoration(
+                  color: CommonColors.whiteColor,
+                  boxShadow: [
+                    BoxShadow(
+                        color: const Color(0x1f3c679d),
+                        offset: Offset(0, 2),
+                        blurRadius: 5,
+                        spreadRadius: 1),
+                  ],
+                  borderRadius: BorderRadius.circular(50.0)),
+              child: Image.asset(
+                LocalImages.ic_google_logo,
+              ),
             ),
           ),
           SizedBox(
@@ -155,79 +160,96 @@ class _SignInViewState extends State<SignInView> {
               ),
             ),
           ),
-          mViewModel!.isSignInScreen
-              ? Container(
-                  //height: CommonUtils().screenHeight(context) * 0.75,
-                  padding: EdgeInsets.only(left: 10, right: 10),
-                  //  margin: EdgeInsets.only(top: 20),
-                  /*decoration: BoxDecoration(
+          AnimatedSwitcher(
+            duration: Duration(milliseconds: 500),
+            transitionBuilder: (Widget child, Animation<double> animation) =>
+                ScaleTransition(
+              scale: animation,
+              child: child,
+            ),
+            child: mViewModel!.isSignInScreen
+                ? Container(
+                    //height: CommonUtils().screenHeight(context) * 0.75,
+                    padding: EdgeInsets.only(left: 10, right: 10),
+                    //  margin: EdgeInsets.only(top: 20),
+                    /*decoration: BoxDecoration(
                 image: DecorationImage(
                   image: ExactAssetImage(LocalImages.ic_signin_bg),
                   fit: BoxFit.contain,
                 ),
               ),*/
-                  child: SingleChildScrollView(
                     child: Container(
                       // height: CommonUtils().screenHeight(context) * 0.5,
-                      margin: EdgeInsets.only(
-                          top: CommonUtils().screenHeight(context) < 600
-                              ? 80
-                              : Platform.isAndroid
-                                  ? 150
-                                  : 130),
+                      /*margin: EdgeInsets.only(
+                        top: CommonUtils().screenHeight(context) < 600
+                            ? 80
+                            : Platform.isAndroid
+                                ? 150
+                                : 130),*/
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
 /*....................................Log Back into your Account.....................*/
-                          reusableTextField(
-                              hint: S.of(context)!.email + ":",
-                              keyboardType: TextInputType.emailAddress,
-                              controller: emailController),
-                          SizedBox(
-                            height: 25,
-                          ),
-                          reusableTextField(
-                              hint: S.of(context)!.password + ":",
-                              obscureText: true,
-                              controller: passwordController),
-                          SizedBox(
-                            height: 25,
-                          ),
-                          Center(
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(context, 'ForgotPassword');
-                              },
-                              child: Text(
-                                S.of(context)!.forgotPassword.toUpperCase() +
-                                    " ?",
-                                style: CommonStyle.getGibsonStyle(
-                                    color: CommonColors.black23,
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.w300,
-                                    decoration: TextDecoration.underline),
+                              reusableTextField(
+                                  hint: S.of(context)!.email + ":",
+                                  keyboardType: TextInputType.emailAddress,
+                                  controller: emailController),
+                              SizedBox(
+                                height: 25,
                               ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 25,
-                          ),
-                          /* ..........................Sign In Now Button....................*/
-                          CustomButtonWithOpacity(
-                            callback: () {
-                              FocusScope.of(context).unfocus();
-                              if (isValid(context)!) {}
-                            },
-                            title: S.of(context)!.signIn,
+                              reusableTextField(
+                                  hint: S.of(context)!.password + ":",
+                                  obscureText: true,
+                                  controller: passwordController),
+                              SizedBox(
+                                height: 25,
+                              ),
+                              Center(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                        context, 'ForgotPassword');
+                                  },
+                                  child: Text(
+                                    S
+                                            .of(context)!
+                                            .forgotPassword
+                                            .toUpperCase() +
+                                        " ?",
+                                    style: CommonStyle.getGibsonStyle(
+                                        color: CommonColors.black23,
+                                        fontSize: 19,
+                                        fontWeight: FontWeight.w300,
+                                        decoration: TextDecoration.underline),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 25,
+                              ),
+                              /* ..........................Sign In Now Button....................*/
+                              CustomButtonWithOpacity(
+                                callback: () {
+                                  FocusScope.of(context).unfocus();
+                                  if (isValid(context)!) {}
+                                },
+                                title: S.of(context)!.signIn,
+                              ),
+                            ],
                           ),
                           _socialLogin
                         ],
                       ),
                     ),
-                  ),
-                )
-              : SignUpView(),
+                  )
+                : SignUpView(),
+          )
         ],
       ),
     );
