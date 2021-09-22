@@ -20,6 +20,7 @@ class SignInViewModel with ChangeNotifier {
   bool startSession = false;
   String? currentSessionId;
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  User? user;
 
   Future<void> attachContext({BuildContext? context}) async {
     mContext = context;
@@ -33,10 +34,35 @@ class SignInViewModel with ChangeNotifier {
 
   void loginWithGoogle() async {
     printf("LOGIN");
-    GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
+    GoogleSignIn _googleSignIn = GoogleSignIn();
+    CommonUtils.showProgressDialog(mContext!);
 
     try {
-      GoogleSignIn signIn = await _googleSignIn.signIn();
+      GoogleSignInAccount? _googleSignInAccount = await _googleSignIn.signIn();
+      if (_googleSignInAccount != null) {
+        GoogleSignInAuthentication googleSignInAuthentication =
+            await _googleSignInAccount.authentication;
+        final credential = GoogleAuthProvider.credential(
+            accessToken: googleSignInAuthentication.accessToken,
+            idToken: googleSignInAuthentication.idToken);
+        try {
+          UserCredential? userCredential =
+              await _auth.signInWithCredential(credential);
+          user = userCredential.user;
+          CommonUtils.hideProgressDialog(mContext!);
+          if (user != null) {
+            Navigator.push(
+                mContext!,
+                CupertinoPageRoute(
+                    builder: (context) => HomeView(
+                          user: user,
+                        )));
+          }
+        } catch (e) {
+          print("Error During get credential from Firebase Authentication:" +
+              e.toString());
+        }
+      }
     } catch (e) {
       printf("Goggle Login Error =>" + e.toString());
     }

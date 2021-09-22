@@ -9,6 +9,7 @@ import 'package:chat_now/view/sign_in/signIn_view_model.dart';
 import 'package:chat_now/view/sign_up/reusable_textfield.dart';
 import 'package:chat_now/view/sign_up/sign_up_view.dart';
 import 'package:chat_now/widget/custom_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -90,7 +91,7 @@ class _SignInViewState extends State<SignInView> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           InkWell(
-            onTap: () {
+            onTap: () async {
               mViewModel!.loginWithGoogle();
             },
             child: Container(
