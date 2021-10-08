@@ -40,7 +40,7 @@ class _SignUpViewState extends State<SignUpView> {
     ));
     Future.delayed(Duration.zero, () {
       mViewModel!.attachContext(context);
-      mViewModel!.initCountryList(context);
+      /* mViewModel!.initCountryList(context);*/
     });
   }
 
@@ -174,8 +174,13 @@ class _SignUpViewState extends State<SignUpView> {
                     CustomButtonWithOpacity(
                       callback: () {
                         FocusScope.of(context).unfocus();
-
-                        if (isValid()!) {}
+                        if (isValid()!) {
+                          mViewModel!.signUp(
+                              fullName: fullNameController.text,
+                              email: emailController.text,
+                              password: passwordController.text,
+                              phoneNumber: phoneController.text);
+                        }
                       },
                       title: S.of(context)!.register,
                     ),
@@ -223,11 +228,6 @@ class _SignUpViewState extends State<SignUpView> {
       return false;
     } else if (phoneController.text.isEmpty) {
       CommonUtils.showSnackBar(S.of(context)!.enterPhone, scaffoldKey);
-      return false;
-    } else if (addressController.text.isEmpty) {
-      CommonUtils.showSnackBar(
-          S.of(context)!.please + S.of(context)!.enterStreetAddress,
-          scaffoldKey);
       return false;
     }
     /* else if (!CommonUtils.isvalidPhone(phoneController.text)) {

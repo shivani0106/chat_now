@@ -4,7 +4,9 @@ import 'package:chat_now/database/app_preferences.dart';
 import 'package:chat_now/generated/i18n.dart';
 import 'package:chat_now/models/app.dart';
 import 'package:chat_now/utils/constant.dart';
+import 'package:chat_now/view/home/home_view_model.dart';
 import 'package:chat_now/view/no_internet/no_internet_view.dart';
+import 'package:chat_now/view/phone_verify/phone_verify_view_model.dart';
 import 'package:chat_now/view/sign_in/signIn_view_model.dart';
 import 'package:chat_now/view/sign_up/signup_view_model.dart';
 import 'package:chat_now/view/splash_view/splash_view.dart';
@@ -102,7 +104,11 @@ class AppState extends State<App> /*with WidgetsBindingObserver*/ {
               ChangeNotifierProvider<SignInViewModel>(
                   create: (_) => SignInViewModel()),
               ChangeNotifierProvider<SignupViewModel>(
-                  create: (_) => SignupViewModel())
+                  create: (_) => SignupViewModel()),
+              ChangeNotifierProvider<HomeViewModel>(
+                  create: (_) => HomeViewModel()),
+              ChangeNotifierProvider<PhoneVerifyViewModel>(
+                  create: (_) => PhoneVerifyViewModel())
             ],
             child: MaterialApp(
               builder: (BuildContext context, Widget? child) {

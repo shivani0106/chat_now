@@ -2,11 +2,14 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:chat_now/database/app_preferences.dart';
+import 'package:chat_now/database/firebase_cloud.dart';
 import 'package:chat_now/models/app.dart';
 import 'package:chat_now/models/country_master.dart';
+import 'package:chat_now/models/user_master.dart';
 import 'package:chat_now/utils/common_colors.dart';
 import 'package:chat_now/utils/common_utils.dart';
 import 'package:chat_now/utils/text_style.dart';
+import 'package:chat_now/view/phone_verify/phone_verify_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -18,6 +21,8 @@ class SignupViewModel with ChangeNotifier {
   BuildContext? mContext;
   AppPreferences appPreferences = new AppPreferences();
   bool success = false;
+
+  FirebaseAuth? _auth = FirebaseAuth.instance;
 
   CountryDetails? selectedNationality;
   List<CountryDetails> nationalityList = [];
@@ -60,5 +65,48 @@ class SignupViewModel with ChangeNotifier {
       );
     }
     return items;
+  }
+
+  void signUp({fullName, password, email, phoneNumber}) async {
+    UserMaster? user = await signInColud(
+        name: fullName, password: password, email: email, phone: phoneNumber);
+
+    final PhoneCodeSent smsOTP =
+        (String verificationId, int? forceResendingToken) {
+      Navigator.push(
+          mContext!,
+          CupertinoPageRoute(
+              builder: (context) => PhoneVerification(
+                    verificationId: verificationId,
+                    userMaster: user,
+                  )));
+    };
+
+    await _auth!.verifyPhoneNumber(
+        phoneNumber: "+91" + phoneNumber,
+        verificationCompleted: (PhoneAuthCredential credential) {
+          CommonUtils.hideProgressDialog(mContext!);
+          print(credential);
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          if (e.code == 'invalid-phone-number') {
+            print('The provided phone number is not valid.');
+          } else {
+            print("Firebase error =>" + e.toString());
+          }
+        },
+        codeSent: smsOTP,
+        codeAutoRetrievalTimeout: (String verificatonId) {});
+  }
+
+  Future<UserMaster?> signInColud({name, email, phone, password}) async {
+    UserMaster? newUser = UserMaster();
+    newUser.password = password;
+    newUser.fullName = name;
+    newUser.phone = int.parse(phone);
+    newUser.email = email;
+    if (newUser != null) {
+      return newUser;
+    }
   }
 }

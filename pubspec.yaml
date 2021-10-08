@@ -42,9 +42,10 @@ dependencies:
   #LOCAL STORAGE
   shared_preferences: 2.0.4
   #FIREBASE
-  firebase_core: 1.2.0
+  firebase_core: ^1.7.0
   firebase_auth: 1.2.0
   firebase_messaging: ^10.0.0
+  cloud_firestore: ^2.5.3
   flutter_svg: ^0.22.0
   carousel_pro: ^1.0.0
   fluttertoast: ^8.0.7
