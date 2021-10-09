@@ -1,17 +1,14 @@
 import 'dart:convert';
-import 'dart:io';
+
 import 'package:chat_now/database/app_preferences.dart';
 import 'package:chat_now/database/firebase_cloud.dart';
 import 'package:chat_now/models/user_master.dart';
 import 'package:chat_now/utils/common_utils.dart';
 import 'package:chat_now/view/home/home_view.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:http/http.dart' as http;
-import 'package:provider/provider.dart';
 
 class SignInViewModel with ChangeNotifier {
   final scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -25,6 +22,7 @@ class SignInViewModel with ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseCloud _firebaseCloud = FirebaseCloud();
   User? user;
+  AppPreferences _appPreferences = AppPreferences();
 
   Future<void> attachContext({BuildContext? context}) async {
     mContext = context;
@@ -80,7 +78,8 @@ class SignInViewModel with ChangeNotifier {
     }
   }
 
-  signInCloud(UserMaster data) {
+  signInCloud(UserMaster data) async {
+    await _appPreferences.setUserLoginDetails(json.encode(data));
     _firebaseCloud.initFirebase();
     _firebaseCloud.firestoreUser!.add(data.toJson()).then((value) {
       print("User data => " + value.id);

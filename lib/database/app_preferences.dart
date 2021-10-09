@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:chat_now/models/user_master.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -45,18 +46,18 @@ class AppPreferences {
   SharedPreferences? _preferences;
 
 // Store user data
- /* Future<UserdataMaster?> getUserDetails() async {
+  Future<UserMaster?> getUserDetails() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String login_details = prefs.getString(KEY_LOGIN_DETAILS) ?? "";
     try {
-      return UserdataMaster.fromJson(json.decode(login_details));
+      return UserMaster.fromJson(json.decode(login_details));
       // return UserDetails.fromJson(json.decode(login_details));
     } catch (e) {
       return null;
     }
   }
 
-  Future<PaymentTypeMaster?> getUserPaymentDetails() async {
+  /*Future<PaymentTypeMaster?> getUserPaymentDetails() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String login_details = prefs.getString(KEY_PAYMENT_DETAILS) ?? "";
     try {
@@ -98,8 +99,8 @@ class AppPreferences {
     } catch (e) {
       return null;
     }
-  }*/
-
+  }
+*/
   /// ----------------------------------------------------------
   /// Method that saves the user decision on sorting order
   /// ----------------------------------------------------------

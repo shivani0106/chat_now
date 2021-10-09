@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:ui';
+
 import 'package:chat_now/generated/i18n.dart';
 import 'package:chat_now/utils/common_colors.dart';
 import 'package:chat_now/utils/common_utils.dart';
@@ -32,7 +33,7 @@ class _SplashState extends State<Splash> {
 
     new Future.delayed(const Duration(seconds: 3), () {
       mViewModel = Provider.of<SplashViewModel>(context, listen: false);
-      mViewModel!.redirectToSignInView(context);
+      mViewModel!.getActiveSession();
       // timer for the splashscreen
     });
   }
